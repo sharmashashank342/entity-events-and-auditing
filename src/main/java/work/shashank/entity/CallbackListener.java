@@ -28,7 +28,6 @@ public class CallbackListener {
      */
     @PostPersist
     public void afterInsert(Object object) {
-        log.info("Inside Callbacks insert");
         createEntityCallback(object, OperationType.CREATE);
     }
 
@@ -49,10 +48,10 @@ public class CallbackListener {
     private void createEntityCallback(final Object entity, final OperationType operationType) {
 
         try {
+            log.info("Inside Callback for operation "+operationType+" and entity "+entity);
             final Predicate<Callbacks> callbacksPredicate = callbacks -> !callbacks.raiseApplicationEvent() && !callbacks.auditable();
             Callbacks callbacks = entity.getClass().getAnnotation(Callbacks.class);
             if (entity.getClass().getAnnotation(Entity.class) == null || callbacks == null || callbacksPredicate.test(callbacks)) {
-                log.info("In Return");
                 return;
             }
 
@@ -67,7 +66,7 @@ public class CallbackListener {
                     .ifPresent(entityService -> entityService.processEntityCallback(entityEvent));
         } catch (Exception e) {
             // Handle Exception silently
-            log.error("Exception occured while raising Entity Callback for entity "+entity+" on operation "+operationType, e);
+            log.error("Exception occured while raising Entity Callback", e);
         }
     }
 }

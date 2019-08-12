@@ -1,8 +1,10 @@
 package work.shashank.util;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
@@ -28,6 +30,8 @@ public class EntityUtils {
 
     static {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        mapper.addMixIn(Object.class, IgnoreHibernatePropertiesInJackson.class);
     }
 
     /**
@@ -99,5 +103,10 @@ public class EntityUtils {
         Assert.notNull(object, "object cannot be null");
         Assert.notNull(tClass, "class cannot be null");
         return mapper.convertValue(object, tClass);
+    }
+
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private abstract class IgnoreHibernatePropertiesInJackson {
+
     }
 }
