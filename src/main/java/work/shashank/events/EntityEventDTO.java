@@ -21,25 +21,45 @@ public class EntityEventDTO extends ApplicationEvent implements Serializable {
         this.entityEvent = entityEvent;
     }
 
+    /**
+     * Entity Class class Object
+     * @return
+     */
     public Class<?> getEntityClass() {
         return entityEvent.getEntityClass();
     }
 
+    /**
+     * Primary key field of Entity as String
+     * @return
+     */
     public String getIdField() {
         return entityEvent.getIdField();
     }
 
+    /**
+     * Get Operation performed on this entity
+     * @return
+     */
     public OperationType getOperationType() {
         return entityEvent.getOperationType();
     }
 
+    /**
+     * Entity properties as <code>Map<String, Object></code>
+     * @return
+     */
     public Map<String, Object> getProperties() {
         return entityEvent.getProperties();
     }
 
-    public <T> T getProperties(Class<T> tClass) {
-        Assert.notNull(tClass, "classType is required");
-        return EntityUtils.convertValue(entityEvent.getProperties(), tClass);
+    /**
+     * Get Entity properties as DTO class Object
+     * @return
+     */
+    public <T> T getProperties(Class<T> dtoClass) {
+        Assert.notNull(dtoClass, "dtoClass is required");
+        return EntityUtils.convertValue(entityEvent.getProperties(), dtoClass);
     }
 
     @Override

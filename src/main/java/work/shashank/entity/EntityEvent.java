@@ -18,9 +18,11 @@ public class EntityEvent implements Serializable {
 
     private String idField;
 
-    // Entity Class Properties as Map<String, Object>
-    // variable names of entity class properties as key
-    // and variable values as value
+    /**
+     * Entity Class Properties as <code>Map<String, Object></code>
+     * variable names of entity class properties as key
+     * and variable values as value
+     */
     private Map<String, Object> properties;
 
     public OperationType getOperationType() {
