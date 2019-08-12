@@ -29,7 +29,7 @@ public class AuditServiceImpl implements AuditService {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    @Async
+    @Async("asyncExecutor")
     public void createAudit(EntityEvent entityEvent) {
 
         Audit audit = buildAudit(entityEvent);

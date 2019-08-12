@@ -20,7 +20,7 @@ public class EntityEventPublisher {
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
-    @Async
+    @Async("asyncExecutor")
     public void publishEntityEvent(final EntityEvent entityEvent) {
 
         EntityEventDTO entityEventDTO = new EntityEventDTO(this, entityEvent);
