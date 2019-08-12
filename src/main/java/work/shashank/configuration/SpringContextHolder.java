@@ -6,6 +6,9 @@ import work.shashank.service.EntityService;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * @author Shashank Sharma
+ */
 @Component
 public class SpringContextHolder {
 

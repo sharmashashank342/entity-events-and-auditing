@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 import work.shashank.entity.EntityEvent;
 import work.shashank.events.EntityEventDTO;
 
+/**
+ * @author Shashank Sharma
+ */
 @Component
 public class EntityEventPublisher {
 

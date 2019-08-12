@@ -22,32 +22,28 @@ public class EntityEventDTO extends ApplicationEvent implements Serializable {
     }
 
     /**
-     * Entity Class class Object
-     * @return
+     * @return Entity {@link java.lang.Class} Object
      */
     public Class<?> getEntityClass() {
         return entityEvent.getEntityClass();
     }
 
     /**
-     * Primary key field of Entity as String
-     * @return
+     * @return Primary key field of Entity as {@link java.lang.String}
      */
     public String getIdField() {
         return entityEvent.getIdField();
     }
 
     /**
-     * Get Operation performed on this entity
-     * @return
+     * @return Return current {@link work.shashank.enums.OperationType} on entity
      */
     public OperationType getOperationType() {
         return entityEvent.getOperationType();
     }
 
     /**
-     * Entity properties as <code>Map<String, Object></code>
-     * @return
+     * @return Properties as {@link java.util.Map}
      */
     public Map<String, Object> getProperties() {
         return entityEvent.getProperties();
@@ -55,7 +51,9 @@ public class EntityEventDTO extends ApplicationEvent implements Serializable {
 
     /**
      * Get Entity properties as DTO class Object
-     * @return
+     * @param dtoClass DTO {@link java.lang.Class} class object
+     * @param <T> This is the type parameter
+     * @return Properties as DTO class Object
      */
     public <T> T getProperties(Class<T> dtoClass) {
         Assert.notNull(dtoClass, "dtoClass is required");

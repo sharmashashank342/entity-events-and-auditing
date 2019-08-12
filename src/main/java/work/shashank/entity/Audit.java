@@ -12,6 +12,7 @@ import java.util.UUID;
 
 /**
  * Table for auditing
+ * @author Shashank Sharma
  */
 @Table(name = "ss_audit")
 @Entity
@@ -84,10 +85,6 @@ public class Audit implements Serializable {
     @Override
     public String toString() {
         return EntityUtils.toJson(this);
-    }
-
-    public static void main(String ...a) {
-        System.out.println(Arrays.asList(Audit.class.getAnnotations()));
     }
 
 }

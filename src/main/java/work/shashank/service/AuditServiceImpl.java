@@ -14,6 +14,9 @@ import java.util.Optional;
 
 import static work.shashank.util.EntityUtils.toJson;
 
+/**
+ * @author Shashank Sharma
+ */
 @Service
 public class AuditServiceImpl implements AuditService {
 

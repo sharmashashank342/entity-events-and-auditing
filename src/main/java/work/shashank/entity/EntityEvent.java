@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * @author Shashank Sharma
+ */
 public class EntityEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -19,7 +22,7 @@ public class EntityEvent implements Serializable {
     private String idField;
 
     /**
-     * Entity Class Properties as <code>Map<String, Object></code>
+     * Entity Class Properties as {@link java.util.Map}
      * variable names of entity class properties as key
      * and variable values as value
      */

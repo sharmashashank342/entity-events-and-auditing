@@ -82,7 +82,7 @@ public class CallbackListenerTest {
 
         callbackListener.afterInsert(new Audit());
 
-        verify(springContextHolder, times(2)).getEntityService();
+        verify(springContextHolder, times(1)).getEntityService();
         verify(entityService).processEntityCallback(entityEventArgumentCaptor.capture());
     }
 

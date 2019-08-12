@@ -8,6 +8,9 @@ import work.shashank.entity.Audit;
 
 import java.util.Optional;
 
+/**
+ * @author Shashank Sharma
+ */
 @Service
 public class EntityServiceImpl implements EntityService {
 
