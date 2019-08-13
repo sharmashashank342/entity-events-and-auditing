@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -42,11 +43,20 @@ public class EntityUtils {
     public static String getAnnotatedFieldValue(Object object, Class<? extends Annotation> annotationClass) {
 
         try {
+            Map<String, String> fieldMap = new HashMap<>();
             for (Field field: object.getClass().getDeclaredFields()) {
                 if (field.isAnnotationPresent(annotationClass)) {
                     field.setAccessible(true);
-                    return field.get(object).toString();
+                    fieldMap.put(field.getName(), field.get(object).toString());
                 }
+            }
+
+            int size = fieldMap.size();
+
+            switch (size) {
+                case 0: return null;
+                case 1: return fieldMap.entrySet().iterator().next().getValue();
+                default: return toJson(fieldMap);
             }
         }catch (Exception e) {
             // Ignored

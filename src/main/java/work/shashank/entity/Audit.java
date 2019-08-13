@@ -27,7 +27,7 @@ public class Audit implements Serializable {
     private String id = UUID.randomUUID().toString();
 
     // Id of Entity that is being saved
-    @Column(length = 100)
+    // Default varchar with length 255
     private String objectId;
 
     @Column(length = 100)
