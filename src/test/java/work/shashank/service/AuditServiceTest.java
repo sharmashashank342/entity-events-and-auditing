@@ -11,7 +11,11 @@ import work.shashank.entity.EntityEvent;
 import work.shashank.entity.Audit;
 import work.shashank.repository.AuditRepository;
 
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -43,10 +47,19 @@ public class AuditServiceTest {
 
         verify(auditRepository).save(auditArgumentCaptor.capture());
 
-        assertEquals(auditArgumentCaptor.getValue().getId().length(), 36);
-        assertEquals(auditArgumentCaptor.getValue().getObjectId(), entityEvent.getIdField());
-        assertEquals(auditArgumentCaptor.getValue().getEntityClass(), audit.getClass().getName());
-        assertEquals(auditArgumentCaptor.getValue().getTableName(), audit.getTableName());
-        assertEquals(auditArgumentCaptor.getValue().getTableData(), toJson(entityEvent.getProperties()));
+        assertThat(isUUID(auditArgumentCaptor.getValue().getId())).isTrue();
+        assertThat(auditArgumentCaptor.getValue().getObjectId()).isEqualTo(entityEvent.getIdField());
+        assertThat(auditArgumentCaptor.getValue().getEntityClass()).isEqualTo(audit.getClass().getName());
+        assertThat(auditArgumentCaptor.getValue().getTableName()).isEqualTo(audit.getTableName());
+        assertThat(auditArgumentCaptor.getValue().getTableData()).isEqualTo(toJson(entityEvent.getProperties()));
+    }
+
+    private boolean isUUID(String string) {
+        try {
+            UUID.fromString(string);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import work.shashank.entity.EntityEvent;
 import work.shashank.events.EntityEventDTO;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
@@ -42,6 +42,6 @@ public class EntityEventPublisherTest {
 
         verify(applicationEventPublisher).publishEvent(applicationEvent.capture());
 
-        assertEquals(applicationEvent.getValue(), getDummyEntityEventDTO(entityEvent));
+        assertThat(applicationEvent.getValue()).isEqualTo(getDummyEntityEventDTO(entityEvent));
     }
 }

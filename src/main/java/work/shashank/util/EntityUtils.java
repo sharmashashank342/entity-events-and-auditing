@@ -44,7 +44,7 @@ public class EntityUtils {
 
         try {
             Map<String, String> fieldMap = new HashMap<>();
-            for (Field field: object.getClass().getDeclaredFields()) {
+            for (Field field: object.getClass().getFields()) {
                 if (field.isAnnotationPresent(annotationClass)) {
                     field.setAccessible(true);
                     fieldMap.put(field.getName(), field.get(object).toString());
