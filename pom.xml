@@ -14,6 +14,23 @@
     <name>entity-events-and-auditing</name>
     <description>Events related to Hibernate Entities and Auditing of entities</description>
 
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <email>sharmashashank342@gmail.com</email>
+            <name>Shashank Sharma</name>
+            <url>https://github.com/sharmashashank342</url>
+            <id>sharmashashank342</id>
+        </developer>
+    </developers>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
