@@ -52,9 +52,7 @@ public class EntityUtils {
                 }
             }
 
-            int size = fieldMap.size();
-
-            switch (size) {
+            switch (fieldMap.size()) {
                 case 0: return null;
                 case 1: return fieldMap.entrySet().iterator().next().getValue().toString();
                 default: return toJson(fieldMap);
