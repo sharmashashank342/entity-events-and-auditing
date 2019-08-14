@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -43,7 +44,7 @@ public class EntityUtils {
     public static String getAnnotatedFieldValue(Object object, Class<? extends Annotation> annotationClass) {
 
         try {
-            Map<String, String> fieldMap = new HashMap<>();
+            Map<String, String> fieldMap = new LinkedHashMap<>();
             for (Field field: object.getClass().getFields()) {
                 if (field.isAnnotationPresent(annotationClass)) {
                     field.setAccessible(true);
