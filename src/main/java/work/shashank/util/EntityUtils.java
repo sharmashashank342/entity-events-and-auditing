@@ -44,11 +44,11 @@ public class EntityUtils {
     public static String getAnnotatedFieldValue(Object object, Class<? extends Annotation> annotationClass) {
 
         try {
-            Map<String, String> fieldMap = new LinkedHashMap<>();
+            Map<String, Object> fieldMap = new LinkedHashMap<>();
             for (Field field: object.getClass().getFields()) {
                 if (field.isAnnotationPresent(annotationClass)) {
                     field.setAccessible(true);
-                    fieldMap.put(field.getName(), field.get(object).toString());
+                    fieldMap.put(field.getName(), field.get(object));
                 }
             }
 
@@ -56,7 +56,7 @@ public class EntityUtils {
 
             switch (size) {
                 case 0: return null;
-                case 1: return fieldMap.entrySet().iterator().next().getValue();
+                case 1: return fieldMap.entrySet().iterator().next().getValue().toString();
                 default: return toJson(fieldMap);
             }
         }catch (Exception e) {
