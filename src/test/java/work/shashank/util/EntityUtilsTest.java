@@ -1,9 +1,13 @@
 package work.shashank.util;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.persistence.Id;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Map;
 import java.util.Objects;
 
@@ -20,7 +24,9 @@ public class EntityUtilsTest {
         assertThat(EntityUtils.getAnnotatedFieldValue(new EntityTest(), Deprecated.class)).isNull();
         assertThat(EntityUtils.getAnnotatedFieldValue(new EntityTest(), Id.class)).isEqualTo("id");
         assertThat(EntityUtils.getAnnotatedFieldValue(new EntityTest(), org.springframework.data.annotation.Id.class)).isEqualTo("1");
-        assertThat(EntityUtils.getAnnotatedFieldValue(new EntityTestChild(), Id.class)).isEqualTo("{\"id2\":\"id2\",\"id\":\"id\"}");
+        assertThat(EntityUtils.getAnnotatedFieldValue(new EntityTestChild(), Id.class)).isEqualTo("{\"id\":\"id\",\"id2\":\"id2\"}");
+        assertThat(EntityUtils.getAnnotatedFieldValue(new Object(), Id.class)).isNull();
+        assertThat(EntityUtils.getAnnotatedFieldValue(null, Id.class)).isNull();
     }
 
     @Test
@@ -34,6 +40,9 @@ public class EntityUtilsTest {
 
         assertThat(entityTest).isEqualTo(entityTestNew);
         assertNotSame(entityTest, entityTestNew);
+
+        setFinalStaticField(EntityUtils.class, "mapper", new ObjectMapper());
+        assertThat(toJson(new ClassThatJacksonCannotSerialize())).isNull();
     }
 
     @Test
@@ -84,10 +93,34 @@ public class EntityUtilsTest {
         }
     }
 
-    public static class EntityTestChild extends EntityTest {
+    public static class EntityTestChild {
+
+        @Id
+        public String id = "id";
+
+        @org.springframework.data.annotation.Id
+        public Integer intId = 1;
 
         @Id
         public String id2 = "id2";
+
+        @Override
+        public boolean equals(Object object) {
+            if (this == object) {
+                return true;
+            }
+            if (!(object instanceof EntityTestChild)) {
+                return false;
+            }
+            EntityTestChild that = (EntityTestChild) object;
+            return Objects.equals(id, that.id) &&
+                    Objects.equals(intId, that.intId) &&
+                    Objects.equals(id2, that.id2);
+        }
+
+        @Override public int hashCode() {
+            return Objects.hash(id, intId, id2);
+        }
     }
 
     private static class EntityTestDTO {
@@ -95,5 +128,24 @@ public class EntityUtilsTest {
         public String id = "id";
 
         public Integer intId = 1;
+    }
+
+    private static class ClassThatJacksonCannotSerialize {
+        private final ClassThatJacksonCannotSerialize self = this;
+
+        @Override
+        public String toString() {
+            return self.getClass().getName();
+        }
+    }
+
+    private static void setFinalStaticField(Class<?> clazz, String fieldName, Object value)
+            throws ReflectiveOperationException {
+        Field field = clazz.getDeclaredField(fieldName);
+        field.setAccessible(true);
+        Field modifiers = Field.class.getDeclaredField("modifiers");
+        modifiers.setAccessible(true);
+        modifiers.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+        field.set(null, value);
     }
 }

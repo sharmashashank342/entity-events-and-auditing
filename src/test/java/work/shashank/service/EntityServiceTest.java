@@ -104,6 +104,26 @@ public class EntityServiceTest {
         verify(entityEventPublisher, never()).publishEntityEvent(any());
     }
 
+    @Test
+    public void test_processEntityCallback_Without_Auditable_2() {
+
+        EntityClassWithoutAuditable entity = new EntityClassWithoutAuditable();
+
+        EntityEvent entityEvent = new EntityEvent();
+        entityEvent.setIdField(entity.id.toString());
+        entityEvent.setEntityClass(entity.getClass());
+        entityEvent.setOperationType(OperationType.CREATE);
+        entityEvent.setProperties(EntityUtils.convertToMap(entity));
+
+        doNothing().when(auditService).createAudit(any(EntityEvent.class));
+        doNothing().when(entityEventPublisher).publishEntityEvent(any(EntityEvent.class));
+
+        entityService.processEntityCallback(entityEvent);
+
+        verify(auditService, never()).createAudit(any());
+        verify(entityEventPublisher).publishEntityEvent(entityEvent);
+    }
+
     @Entity
     @Callbacks(auditable = true, raiseApplicationEvent = false)
     private class EntityAuditableWithoutCallback {
@@ -122,6 +142,14 @@ public class EntityServiceTest {
 
     @Entity
     private class EntityClass {
+
+        @Id
+        public Integer id = 1;
+    }
+
+    @Entity
+    @Callbacks
+    private class EntityClassWithoutAuditable {
 
         @Id
         public Integer id = 1;

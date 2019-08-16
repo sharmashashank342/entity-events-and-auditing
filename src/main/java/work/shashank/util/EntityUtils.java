@@ -45,7 +45,7 @@ public class EntityUtils {
 
         try {
             Map<String, Object> fieldMap = new LinkedHashMap<>();
-            for (Field field: object.getClass().getFields()) {
+            for (Field field: object.getClass().getDeclaredFields()) {
                 if (field.isAnnotationPresent(annotationClass)) {
                     field.setAccessible(true);
                     fieldMap.put(field.getName(), field.get(object));
