@@ -5,6 +5,13 @@
 
 `spring-boot` Library for **`auditing`** and **`realtime spring application events`** of every entity **save** or **update**
 
+# Dependencies
+Spring Boot
+
+Spring Data JPA
+
+Hibernate
+
 # Description
 
 After we call 
