@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -87,4 +88,25 @@ public class Audit implements Serializable {
         return EntityUtils.toJson(this);
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof Audit)) {
+            return false;
+        }
+        Audit audit = (Audit) object;
+        return Objects.equals(id, audit.id) &&
+                Objects.equals(objectId, audit.objectId) &&
+                Objects.equals(tableName, audit.tableName) &&
+                Objects.equals(entityClass, audit.entityClass) &&
+                Objects.equals(tableData, audit.tableData) &&
+                Objects.equals(createdOn, audit.createdOn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, objectId, tableName, entityClass, tableData, createdOn);
+    }
 }

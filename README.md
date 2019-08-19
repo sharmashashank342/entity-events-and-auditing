@@ -12,18 +12,31 @@ Spring Data JPA
 
 Hibernate
 
-# Description
-
-After we call 
-`org.springframework.data.repository.CrudRepository#save(java.lang.Object)`
-
-or 
-
-`org.springframework.data.jpa.repository.JpaRepository#save(java.lang.Iterable)`
-
-it saves the object to DB as well as it will also create a copy of saved entity snapshot in `ss_audit` table as well
-
-
 # Version used
 
 We used `spring-boot-starter-parent` version `1.5.21.RELEASE` as parent and will upgrade versions in later releases
+
+
+# Description
+
+In Spring Data JPA, many times we require auditing of tables or `entities` and also want to **sync** the same `entities` to any **`NoSQL`** Datasource for **`CQRS`**
+
+In Those cases, this library will be a great help.
+
+It works based on [**`Hibernate Entity Events`**](https://docs.jboss.org/hibernate/core/4.0/hem/en-US/html/listeners.html)
+
+
+The Events are raised after you call any of the below methods available in JPA
+
+- ```org.springframework.data.repository.CrudRepository#save(java.lang.Object)```
+
+- ```org.springframework.data.jpa.repository.JpaRepository#save(java.lang.Iterable)```
+
+
+# How to use
+
+
+- For Auditing and Listening Entity Events 
+
+
+ 
