@@ -5,6 +5,10 @@
 
 `spring-boot` Library for **`auditing`** and **`realtime spring application events`** of every entity **save** or **update**
 
+## License
+
+Project is licensed under **Apache Software License, Version 2.0**.
+
 # Dependencies
 Spring Boot
 
@@ -33,10 +37,21 @@ The Events are raised after you call any of the below methods available in JPA
 - ```org.springframework.data.jpa.repository.JpaRepository#save(java.lang.Iterable)```
 
 
-# How to use
+# When to use
+
+For **Auditing** and **Listening Entity Events** (Create or Update currently Supported)
 
 
-- For Auditing and Listening Entity Events 
+## Support
+If you need help using the project feel free to drop an email or create an issue in github.com (preferred)
 
+## Contributions
+To help development you are encouraged to  
+* Provide suggestion/feedback/Issue
+* pull requests for new features
+* Star :star2: the project
+
+
+[![View My profile on LinkedIn](https://static.licdn.com/scds/common/u/img/webpromo/btn_viewmy_160x33.png)](https://www.linkedin.com/in/sharmashashank342)
 
  

@@ -5,6 +5,4 @@ os:
   - linux
 
 script:
-  - mvn test jacoco:report
-after_success:
   - mvn clean test jacoco:report coveralls:report
