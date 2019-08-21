@@ -3,7 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/sharmashashank342/entity-events-and-auditing/badge.svg?branch=master)](https://coveralls.io/github/sharmashashank342/entity-events-and-auditing?branch=master)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/in.techpal/entity-events/badge.svg)](https://maven-badges.herokuapp.com/maven-central/in.techpal/entity-events)
-[![Javadocs](https://www.javadoc.io/badge/in.techpal/entity-events.svg)](https://www.javadoc.io/doc/in.techpal/entity-events)
+[![Javadocs](https://www.javadoc.io/badge/in.techpal/entity-events.svg?color=blue)](https://www.javadoc.io/doc/in.techpal/entity-events)
 
 `spring-boot` Library for **`auditing`** and **`realtime spring application events`** of every entity **save** or **update**
 
